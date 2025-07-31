@@ -1,0 +1,56 @@
+body {
+    font-family: Nunito Sans, sans-serif;
+}
+h1 {
+  font-size: 70px;
+  font-weight: 600;
+  letter-spacing: -1.5px;
+}
+h2 {
+  font-size: 50px;
+  font-weight: 550;
+}
+h3 {
+  font-size: 30px;
+  font-weight: 500;
+}
+.tag-text {
+  color: #9137be;
+  font-weight: bold;
+  font-size: 24px;
+}
+.subtitle1 {
+  font-size: 17px;
+  font-weight: normal;
+  letter-spacing: 0.15px;
+}
+.subtitle2 {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.15px;
+}
+.body1 {
+  font-size: 17px;
+  font-weight: normal;
+  letter-spacing: 0.5px;
+}
+.body2 {
+  font-size: 15px;
+  font-weight: normal;
+  letter-spacing: 0.25px;
+}
+.button-text {
+  font-size: 15px;   
+  font-weight: medium; 
+  letter-spacing: 1.25px;
+}
+.caption-text {
+  font-size: 13px;
+  font-weight: normal;
+  letter-spacing: 0.4px;
+}
+.overline-text {
+  font-size: 11px;
+  font-weight: normal;
+  letter-spacing: 1.5px;
+}
