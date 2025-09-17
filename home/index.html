@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link rel="icon" type="image/x-icon" href="img/favicon.png"/>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/f0b7e5a2c6.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <nav>
+    <!-- Logo -->
+    <div class="logo">
+      <img src="img/logo_dark mode.png" alt="Logo Dark Mode">
+    </div>
+
+    <!-- Menù al centro -->
+    <div class="nav-center">
+      <ul class="nav-links">
+        <li><a href="scienza.html">SCIENZA</a></li>
+        <li><a href="cultura.html">CULTURA</a></li>
+        <li><a href="music.html">MUSICA</a></li>
+        <li><a href="eco.html">ECOSOSTENIBILITÀ</a></li>
+      </ul>
+    </div>
+
+    <!-- Icone e campo di ricerca -->
+    <div class="icons">
+      <div class="search-container">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" class="search-input" placeholder="Cerca...">
+      </div>
+      <!-- Icona hamburger -->
+      <i class="fa-solid fa-bars" id="menuIcon"></i>
+    </div>
+  </nav>
+
+  <!-- Menu laterale -->
+  <div class="side-menu" id="sideMenu">
+    <!-- Header menu laterale -->
+    <div class="side-menu-header">
+      <!-- Favicon come link alla homepage -->
+      <a href="index.html">
+        <img src="img/favicon.png" alt="Home">
+      </a>
+      <!-- Icona chiusura -->
+      <i class="fa-solid fa-xmark" id="closeMenu"></i>
+    </div>
+
+    <!-- Barra di ricerca nel menu -->
+    <div class="side-search-container">
+      <input type="text" placeholder="Cerca...">
+    </div>
+
+    <!-- Voci menu -->
+    <ul>
+      <li><a href="scienza.html">Scienza</a></li>
+      <li><a href="cultura.html">Cultura</a></li>
+      <li><a href="music.html">Musica</a></li>
+      <li><a href="eco.html">Ecosostenibilità</a></li>
+      <li><a href="#contatti">Contatti</a></li>
+    </ul>
+  </div>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <img src="img/Immagine segnaposto.png" alt="Hero image">
+    <div class="hero-text">
+      <strong>Benvenuto su Cerebros</strong> 
+      Accendi la mente con articoli e approfondimenti su scienza, cultura, musica ed ecosostenibilità.
+    </div>
+  </section>
+
+
+  <!-- 3 Cards -->
+<section class="card-grid">
+  <div class="card">
+    <img src="img/1df4f74f-3432-4fc8-972e-73f02bb9661c.png" alt="Scienza">
+    <div class="info">
+      <h1>Scienza</h1>
+      <p>Il becco del martin pescatore è un capolavoro della natura, tanto da ispirare ingegneri e scienziati. Questo piccolo uccello ha rivoluzionato anche il mondo dell'alta velocità.</p>
+      <button onclick="window.location.href='scienza.html'">Scopri</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="img/RSDntX22sc15Mr1ytGhHPu.png" alt="Cultura">
+    <div class="info">
+      <h1>Cultura</h1>
+      <p>Quante ne sai sulle biblioteche perdute del Mediterraneo?</p>
+      <button onclick="window.location.href='cultura.html'">Scopri</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="img/Image.png" alt="Ecosostenibilità">
+    <div class="info">
+      <h1>Ecosostenibilità</h1>
+      <p>Consumi, tecnologia e stili di vita: come rendere più leggero il nostro impatto sul pianeta?</p>
+      <button onclick="window.location.href='eco.html'">Scopri</button>
+    </div>
+  </div>
+</section>
+
+  <!-- Primo Piano --> 
+<section class="featured"> 
+  <h2 class="section-title">Primo piano</h2>
+  <div class="featured-inner">
+    <div class="featured-video-carousel">
+      <div id="videoContainer"></div>
+
+      <div class="carousel-controls">
+        <button id="prevBtn">&lt;</button>
+        <button id="nextBtn">&gt;</button>
+      </div>
+    </div>
+    <div class="featured-content">
+      <h3>Musica Video 1</h3>
+      <p>Descrizione per il video 1</p>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Altre Card -->
+  <section class="card-grid">
+    <div class="card">
+      <img src="img/1df4f74f-3432-4fc8-972e-73f02bb9661c.png" alt="Scienza">
+      <div class="info">
+        <h3>Scienza</h3>
+        <p>Body text for whatever you'd like to add more to the subheading.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="img/RSDntX22sc15Mr1ytGhHPu.png" alt="Cultura">
+      <div class="info">
+        <h3>Cultura</h3>
+        <p>Body text for whatever you'd like to add more to the subheading.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="img/RSDntX22sc15Mr1ytGhHPu.png" alt="Ecosostenibilità">
+      <div class="info">
+        <h3>Ecosostenibilità</h3>
+        <p>Body text for whatever you'd like to add more to the subheading.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+
+      <!-- Nome sito + descrizione -->
+      <div class="footer-info">
+        <img src="img/favicon.png">
+        <h3>Cerebros</h3>
+        <p>Divulghiamo scienza, cultura, musica ed ecosostenibilità per menti curiose.</p>
+      </div>
+
+      <!-- Link utili -->
+      <div class="footer-links">
+        <h4 class="footer-title">Sezioni</h4>
+        <div class="footer-underline"></div>
+        <ul>
+          <li><a href="scienza.html">Scienza</a></li>
+          <li><a href="cultura.html">Cultura</a></li>
+          <li><a href="music.html">Musica</a></li>
+          <li><a href="eco.html">Ecosostenibilità</a></li>
+        </ul>
+      </div>
+
+      <!-- Contatti con link -->
+      <div class="footer-contact" id="contatti">
+        <h4 class="footer-title">Contatti</h4>
+        <div class="footer-underline"></div>
+        <p><i class="fa-solid fa-envelope"></i><a href="mailto:info@cerebros.it">info@cerebros.it</a></p>
+        <p><i class="fa-solid fa-phone"></i><a href="tel:+390123456789">+39 0123 456789</a></p>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="footer-newsletter">
+        <h4 class="newsletter-title">Iscriviti alla Newsletter</h4>
+        <form action="#" method="post">
+          <input type="email" name="email" placeholder="Inserisci la tua email">
+          <button type="submit">Iscriviti</button>
+        </form>
+      </div>
+    </div>
+    <!-- Crediti -->
+    <div class="footer-bottom">
+      <p>&copy; 2025 Cerebros - Accendi la mente. Tutti i diritti riservati.</p>
+    </div>
+  </footer>
+<script>
+    document.addEventListener("DOMContentLoaded", function () { // Esegue il codice quando il DOM è pronto
+      /* Ricerca top navbar */
+      const searchContainer = document.querySelector(".search-container");
+      const searchIcon = document.querySelector(".search-icon");
+      const searchInput = document.querySelector(".search-input");
+
+      searchIcon.addEventListener("click", () => { // Al click sulla lente
+        searchContainer.classList.toggle("active"); // attiva/disattiva la classe che apre l'input
+        if (searchContainer.classList.contains("active")) { // Se l'input è attivo
+          searchInput.focus(); // Porta subito il focus sull'input per digitare
+        }
+      });
+
+      document.addEventListener("click", (event) => { // Al click in qualsiasi punto del documento
+        // se il click è fuori dal box e il box è aperto
+        if (!searchContainer.contains(event.target) && searchContainer.classList.contains("active")) {
+          searchContainer.classList.remove("active"); // chiudi il box di ricerca
+        }
+      });
+
+      /* Menu laterale */
+      const menuIcon = document.getElementById("menuIcon");
+      const sideMenu = document.getElementById("sideMenu");
+      const overlay = document.getElementById("overlay");
+      const closeMenu = document.getElementById("closeMenu");
+
+      // Apre il menu
+      menuIcon.addEventListener("click", () => {
+        sideMenu.classList.add("open"); // Aggiunge la classe che fa scorrere il menu
+        overlay.classList.add("active"); // Mostra l'overlay per scurire lo sfondo
+      });
+
+      // Chiude il menu
+      const closeSideMenu = () => {
+        sideMenu.classList.remove("open"); // Rimuove la classe di apertura
+        overlay.classList.remove("active"); // Nasconde l'overlay
+      };
+
+      closeMenu.addEventListener("click", closeSideMenu); // Chiude cliccando la X
+      overlay.addEventListener("click", closeSideMenu); // Chiude cliccando su tutto lo schermo (overlay)
+
+      // Comportamento speciale per la voce "Contatti"
+      const contattiLink = document.querySelector('.side-menu a[href="#contatti"]');
+
+      contattiLink.addEventListener("click", function (e) {
+        e.preventDefault(); // Impedisce il comportamento predefinito (navigazione immediata)
+        closeSideMenu();
+
+        // Scrolla alla sezione contatti dopo un breve delay per consentire l'animazione
+        setTimeout(() => {
+          const contattiSection = document.getElementById("contatti");
+          if (contattiSection) {
+            contattiSection.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 300);
+      });
+    });
+      
+    // Carosello video
+   const videosData = [ 
+  {
+    type: "local",
+    src: "video/video1.mp4",
+    title: "Musica, luce e sostenibilità",
+    description: "Un estratto dal vivo che restituisce l'impatto scenico dei Coldplay: scenografie “cosmiche”, luci sincronizzate e il pubblico parte attiva grazie ai braccialetti LED. Il progetto live recente della band ha puntato anche su soluzioni più responsabili: energie rinnovabili, tappeti cinetici e biciclette per generare energia, materiali riutilizzabili e braccialetti compostabili."
+  },
+  {
+    type: "local",
+    src: "video/video2.mp4",
+    title: "Digitale: l'impatto che non vediamo",
+    description: "Data center, reti e dispositivi fanno girare Internet e consumano energia. Questo video spiega dove “nasce” l'impronta digitale e come possiamo ridurla con scelte quotidiane più sobrie. Dalla posta elettronica allo streaming: piccole azioni (allegati leggeri, meno invii superflui, audio quando basta, device efficienti) fanno la differenza se adottate da tanti."
+  },
+  {
+    type: "youtube",
+    src: "https://www.youtube.com/embed/h_-TA3Ph-E4",
+    title: "Scienza, ricerca e neuroni che diventano gamer",
+    description: "Nel video Barbascura eXtra ci guida attraverso l’esperimento surrealmente affascinante condotto da Cortical Labs, dove circa 800.000 neuroni vengono posti in una sorta di “piatto di elettrodi” chiamato DishBrain. I neuroni ricevono stimoli, imparano a reagire e migliorano grazie a un sistema di ricompense. È l’intelligenza che germoglia dove meno te l’aspetti — una frontiera che mette in gioco idee su coscienza, apprendimento biologico e il confine tra il vivo e il simulato. Una riflessione che incuriosisce, inquieta e spinge a domandarci: cosa significa davvero “sapere” giocare?"
+  }
+];
+
+const videoContainer = document.getElementById("videoContainer");
+const titleElement = document.querySelector(".featured-content h3");
+const descriptionParagraph = document.querySelector(".featured-content p");
+
+let currentIndex = 0;
+
+function updateVideoContent(index) {
+  const videoData = videosData[index];
+
+  // Pulisce il contenitore video
+  videoContainer.innerHTML = "";
+
+  let mediaElement;
+
+  if (videoData.type === "local") {
+    mediaElement = document.createElement("video");
+    mediaElement.src = videoData.src;
+    mediaElement.controls = true;
+    mediaElement.className = "carousel-video";
+  } else if (videoData.type === "youtube") {
+    mediaElement = document.createElement("iframe");
+    mediaElement.src = videoData.src;
+    mediaElement.setAttribute("frameborder", "0");
+    mediaElement.setAttribute("allowfullscreen", "true");
+    mediaElement.className = "carousel-video";
+  }
+
+  videoContainer.appendChild(mediaElement);
+
+  // Aggiorna titolo e descrizione
+  titleElement.textContent = videoData.title;
+  descriptionParagraph.textContent = videoData.description;
+}
+
+
+// Controlli carosello
+document.getElementById("prevBtn").addEventListener("click", () => {
+  currentIndex = (currentIndex - 1 + videosData.length) % videosData.length;
+  updateVideoContent(currentIndex);
+});
+
+document.getElementById("nextBtn").addEventListener("click", () => {
+  currentIndex = (currentIndex + 1) % videosData.length;
+  updateVideoContent(currentIndex);
+});
+
+// Carica il primo video all'avvio
+updateVideoContent(currentIndex);
+
+
+  </script>
+</body>
+</html>
