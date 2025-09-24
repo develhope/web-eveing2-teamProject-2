@@ -112,47 +112,20 @@
   <h2 class="section-title">Primo piano</h2>
   <div class="featured-inner">
     <div class="featured-video-carousel">
-      <div id="videoContainer"></div>
-
       <div class="carousel-controls">
         <button id="prevBtn">&lt;</button>
         <button id="nextBtn">&gt;</button>
       </div>
+      <div class="video-wrapper" id="videoContainer"></div>
+
     </div>
+
     <div class="featured-content">
-      <h3>Musica Video 1</h3>
-      <p>Descrizione per il video 1</p>
+    <h3 id="videoTitle">Titolo</h3>
+    <p id="videoDescription">Descrizione</p>
     </div>
   </div>
 </section>
-
-
-  <!-- Altre Card -->
-  <section class="card-grid">
-    <div class="card">
-      <img src="img/1df4f74f-3432-4fc8-972e-73f02bb9661c.png" alt="Scienza">
-      <div class="info">
-        <h3>Scienza</h3>
-        <p>Body text for whatever you'd like to add more to the subheading.</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="img/RSDntX22sc15Mr1ytGhHPu.png" alt="Cultura">
-      <div class="info">
-        <h3>Cultura</h3>
-        <p>Body text for whatever you'd like to add more to the subheading.</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="img/RSDntX22sc15Mr1ytGhHPu.png" alt="Ecosostenibilità">
-      <div class="info">
-        <h3>Ecosostenibilità</h3>
-        <p>Body text for whatever you'd like to add more to the subheading.</p>
-      </div>
-    </div>
-  </section>
 
   <!-- FOOTER -->
   <footer>
@@ -277,12 +250,18 @@
     src: "https://www.youtube.com/embed/h_-TA3Ph-E4",
     title: "Scienza, ricerca e neuroni che diventano gamer",
     description: "Nel video Barbascura eXtra ci guida attraverso l’esperimento surrealmente affascinante condotto da Cortical Labs, dove circa 800.000 neuroni vengono posti in una sorta di “piatto di elettrodi” chiamato DishBrain. I neuroni ricevono stimoli, imparano a reagire e migliorano grazie a un sistema di ricompense. È l’intelligenza che germoglia dove meno te l’aspetti — una frontiera che mette in gioco idee su coscienza, apprendimento biologico e il confine tra il vivo e il simulato. Una riflessione che incuriosisce, inquieta e spinge a domandarci: cosa significa davvero “sapere” giocare?"
+  },
+  {
+    type: "youtube",
+    src: "https://www.youtube.com/embed/AunSrYxUgp0?si=vQ2WhR7OLQbDpqp1",
+    title: "Dinosauro Antonio: il Tethyshadros italiano",
+    description: "Scoperto in Friuli, questo dinosauro ha cambiato la nostra conoscenza della fauna europea di 80 milioni di anni fa. Il video racconta la sua eccezionale conservazione e le ricerche degli scienziati italiani."
   }
 ];
 
 const videoContainer = document.getElementById("videoContainer");
-const titleElement = document.querySelector(".featured-content h3");
-const descriptionParagraph = document.querySelector(".featured-content p");
+const titleElement = document.getElementById("videoTitle");
+const descriptionParagraph = document.getElementById("videoDescription");
 
 let currentIndex = 0;
 
@@ -304,6 +283,7 @@ function updateVideoContent(index) {
     mediaElement.src = videoData.src;
     mediaElement.setAttribute("frameborder", "0");
     mediaElement.setAttribute("allowfullscreen", "true");
+    mediaElement.setAttribute("allow", "autoplay; encrypted-media");
     mediaElement.className = "carousel-video";
   }
 
@@ -326,9 +306,7 @@ document.getElementById("nextBtn").addEventListener("click", () => {
   updateVideoContent(currentIndex);
 });
 
-// Carica il primo video all'avvio
 updateVideoContent(currentIndex);
-
 
   </script>
 </body>
