@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cerebros — Scienza</title>
+  <link rel="icon" type="image/png" href="img/favicon.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;900&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/f0b7e5a2c6.js" crossorigin="anonymous"></script>
+
+  <style>
+  /* Token di tema e layout */
+  :root{
+    --bg:#ffffff;
+    --fg:#0b0f14;
+    --muted:#444a52;
+    --surface:#ffffff;
+    --elev:0 8px 24px rgba(0,0,0,.12),0 4px 12px rgba(0,0,0,.08);
+    --border:#e3e3e7;
+    --accent:#000FFF;
+    --card-band-grad:linear-gradient(0deg,rgba(0,0,0,.7),rgba(0,0,0,0));
+    --dot:rgba(255,255,255,.6);
+    --dot-border:rgba(0,0,0,.3);
+    --radius:20px;
+    --container:1200px;
+    --padX:100px;
+    --ease:cubic-bezier(.25,.8,.25,1);
+    --t:color .25s var(--ease), background-color .25s var(--ease), border-color .25s var(--ease);
+  }
+  @media (prefers-reduced-motion:no-preference){ *{transition:var(--t);} }
+
+  /* Base */
+  body{
+    margin:0;
+    font-family:"Nunito Sans",sans-serif;
+    background:var(--bg);
+    color:var(--fg);
+    overflow-x:hidden;
+  }
+
+  /* NAVBAR */
+  nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px 40px;
+    background:#24282c;
+    color:#f5f5f5;
+    position:relative;
+    z-index:1000;
+  }
+  .logo img{height:40px;display:block}
+  .logo{flex-shrink:0}
+
+  .nav-center{flex:1;display:flex;justify-content:center}
+  .nav-links{list-style:none;display:flex;gap:40px;margin:0;padding:0}
+  .nav-links a{
+    position:relative;text-decoration:none;color:#f5f5f5;font-size:14px;transition:color .3s;
+  }
+  .nav-links a:hover{color:#ccc}
+  .nav-links a::before{
+    content:"";position:absolute;left:0;bottom:-3px;width:100%;height:3px;background:#f5f5f5;
+    transform:scale3d(0,1,1);transform-origin:100% 50%;transition:transform .5s;
+  }
+  .nav-links a:hover::before{transform:scale3d(1,1,1);transform-origin:0 50%}
+
+  .icons{display:flex;align-items:center}
+  .icons i{margin-left:20px;font-size:16px;color:#f5f5f5;cursor:pointer;transition:color .3s}
+  .icons i:hover{color:#ccc}
+
+  /* Ricerca in navbar */
+  .search-container{position:relative;display:flex;align-items:center}
+  .search-input{
+    position:absolute;right:30px;width:0;opacity:0;padding:8px 10px;font-size:14px;
+    border:none;border-radius:20px;background:#f5f5f5;color:#24282c;outline:none;transition:all .4s;
+  }
+  .search-container.active .search-input{width:180px;opacity:1;right:35px}
+
+  /* Menù laterale */
+  .side-menu{
+    position:fixed;top:0;right:0;width:300px;height:100vh;background:#24282c;color:#f5f5f5;
+    transform:translateX(100%);transition:transform .4s;z-index:1100;padding:20px;display:flex;flex-direction:column;
+  }
+  .side-menu.open{transform:translateX(0)}
+  .side-menu-header{display:flex;justify-content:space-between;align-items:center}
+  .side-menu-header img{width:32px;height:32px;cursor:pointer}
+  .side-menu-header i{font-size:18px;cursor:pointer;transition:color .3s}
+  .side-menu-header i:hover{color:#ccc}
+  .side-search-container{display:flex;justify-content:center;margin:30px 0}
+  .side-search-container input{
+    width:80%;padding:8px 10px;border:none;border-radius:20px;background:#f5f5f5;color:#24282c;outline:none;font-size:14px;
+  }
+  .side-menu ul{list-style:none;padding:0;margin-top:10px;display:flex;flex-direction:column;gap:20px}
+  .side-menu ul a{color:#f5f5f5;text-decoration:none;font-size:16px;transition:color .3s}
+  .side-menu ul a:hover{color:#ccc}
+
+  /* Overlay scuro */
+  .overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,.6);opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s;z-index:1050;
+  }
+  .overlay.active{opacity:1;visibility:visible}
+
+  /* Navbar responsive */
+  @media (max-width:800px){
+    nav{padding:12px 20px}
+    .nav-center{display:none}
+    .icons{gap:10px}
+    .search-container.active .search-input{width:110px}
+  }
+  @media (min-width:801px) and (max-width:900px){
+    nav{padding:12px 20px}
+    .nav-center{display:flex;justify-content:center}
+    .nav-links{gap:20px}
+  }
+
+  /* HERO */
+  .music-hero{
+    position:relative;min-height:48vh;display:grid;place-items:center;
+    background:url('img/Alzheimers_Application.jpg') center/cover no-repeat;
+  }
+  .music-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.55))}
+  .hero-inner{position:relative;z-index:1;text-align:center;color:#fff;padding:40px 16px}
+  .hero-inner h1{margin:0 0 8px;font-size:clamp(28px,4vw,44px)}
+  .hero-inner p{margin:0;font-size:clamp(15px,2vw,18px);opacity:.95}
+
+  /* Sezione intro */
+  .section{padding:28px var(--padX) 0;max-width:calc(var(--container) + 2*var(--padX));margin:0 auto}
+  .section h2{margin:0 0 10px;font-size:24px}
+  .lead{margin:0 0 18px;color:var(--muted)}
+
+  /* Griglia card */
+  .music-card-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;padding:18px var(--padX) 60px;max-width:calc(var(--container) + 2*var(--padX));margin:0 auto;
+  }
+
+  /* Card base */
+  .cardx{
+    position:relative;border-radius:var(--radius);overflow:hidden;background:var(--surface);box-shadow:var(--elev);
+    border:1px solid var(--border);
+  }
+
+  /* Slider immagini */
+  .slider{position:relative;width:100%;height:360px;background:#000}
+  @media (max-width:900px){.slider{height:auto;aspect-ratio:16/9}}
+  .slide{position:absolute;inset:0;opacity:0;transition:opacity .3s var(--ease)}
+  .slide.active{opacity:1}
+  .slide img{width:100%;height:100%;object-fit:cover}
+
+  /* Fascia descrittiva */
+  .band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 18px;
+  z-index: 2;
+  max-height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  transition: background-color .4s var(--ease);
+}
+
+  .band h3{margin:0 0 6px;font-size:1rem;font-weight:800}
+  .band p{margin:0;font-size:.95rem;line-height:1.4}
+  .band .more {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.6s var(--ease), opacity 0.6s var(--ease);
+}
+
+  /* Stato hover card */
+  .cardx:hover .band {
+  background-color: rgba(0, 0, 0, 0.82);
+}
+
+
+  .cardx:hover .band .more {
+  opacity: 1;
+  max-height: 400px;
+}
+
+  /* Frecce slider */
+  .arrow{
+    position:absolute;top:50%;transform:translateY(-50%);
+    background:none;border:none;color:#fff;font-size:22px;cursor:pointer;z-index:3
+  }
+  .arrow.prev{left:10px}
+  .arrow.next{right:10px}
+
+  /* Dots slider */
+  .dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:3}
+  .dot{width:12px;height:12px;border-radius:50%;background:var(--dot);border:1px solid var(--dot-border);cursor:pointer}
+  .dot.active{background:#fff}
+
+  /* VIDEO */
+  .video-section .wrap{display:grid;grid-template-columns:2fr 1fr;gap:40px;align-items:center}
+  .video-frame{width:100%;aspect-ratio:16/9;background:#000;border-radius:10px;overflow:hidden}
+  .video-frame iframe{width:100%;height:100%;display:block}
+  .video-aside{background:var(--surface);line-height:1.7;color:var(--fg)}
+  .video-aside h3{margin:0 0 8px}
+  .video-section{padding-bottom:80px}
+
+  /* FOOTER */
+  footer{background:#24282c;color:#f5f5f5;padding:40px 32px 20px}
+  .footer-container{
+    display:flex;flex-wrap:wrap;justify-content:space-between;gap:40px;max-width:1200px;margin:0 auto;padding:0 16px;
+  }
+  .footer-container > div{min-width:200px}
+  .footer-info,.footer-newsletter{flex:0 0 220px}
+  .footer-info{margin-top:14px}
+  .footer-info h3{margin:0}
+  .footer-title{margin-bottom:5px;position:relative;display:inline-block}
+  .footer-underline{width:40px;height:3px;background:#000FFF;margin:0 0 15px 0}
+  .footer-contact i{margin-right:8px;color:#f5f5f5;font-size:16px}
+  .footer-contact a{color:#f5f5f5;display:inline-block;transition:transform .3s}
+  .footer-contact a:hover{transform:scale(1.1) translateX(5px);text-decoration:none}
+  .footer-links ul{list-style:none;margin:0;padding:0}
+  .footer-links li{margin-bottom:8px}
+  .footer-links a{color:#fff;text-decoration:none}
+  .footer-links a:hover{text-decoration:underline}
+  .footer-newsletter form{display:flex;max-width:300px;flex-wrap:nowrap;margin:0 auto}
+  .footer-newsletter input[type="email"]{padding:6px 10px;border:none;border-radius:10px 0 0 10px;outline:none;flex:1}
+  .footer-newsletter button{padding:6px 10px;border:none;background:rgba(0,0,0,.5);color:#f5f5f5;cursor:pointer;border-radius:0 10px 10px 0}
+  .footer-bottom{text-align:center;margin-top:20px;font-size:14px;border-top:1px solid rgba(245,245,245,.2);padding-top:10px;max-width:80%;margin-left:auto;margin-right:auto}
+
+  /* Footer responsive */
+  @media (max-width:767px){
+    .footer-container{flex-direction:column;align-items:center;gap:40px;padding:0 16px}
+    .footer-container > div{width:100%;max-width:400px;text-align:center}
+    .footer-info,.footer-newsletter{flex:0 0 120px}
+    .footer-info img{margin:0 auto 10px;display:block}
+    .footer-info h3{margin:10px 0 6px}
+    .footer-info p{margin:0 0 10px}
+    .footer-links li{margin-bottom:10px}
+    .footer-contact p{margin:8px 0}
+    .footer-newsletter form{flex-direction:row;max-width:300px;margin:0 auto;margin-top:10px}
+    .footer-newsletter input[type="email"]{flex:1 1 auto;min-width:0;border-radius:10px 0 0 10px;margin-bottom:0}
+    .footer-newsletter button{flex:0 0 auto;border-radius:0 10px 10px 0}
+    .footer-bottom{max-width:400px;margin-left:auto;margin-right:auto;text-align:center;font-size:13px}
+    .footer-title{display:flex;flex-direction:column;align-items:center;margin-bottom:5px}
+    .footer-underline{width:40px;height:3px;background:#000FFF;display:block;margin:4px auto 16px auto}
+  }
+  @media (min-width:768px) and (max-width:1057px){
+    .footer-container{display:flex;flex-wrap:wrap;justify-content:center;gap:40px}
+    .footer-info{order:1;flex:0 0 300px}
+    .footer-links{order:2;flex:0 0 300px}
+    .footer-contact{order:3;flex:0 0 300px}
+    .footer-newsletter{order:4;flex:0 0 300px}
+  }
+  @media (hover:none), (max-width:768px){
+    .footer-contact a:hover{transform:none !important;color:inherit !important;box-shadow:none !important;text-decoration:none !important}
+  }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo">
+      <img src="img/logo_dark mode.png" alt="Logo Dark Mode">
+    </div>
+
+    <div class="nav-center">
+      <ul class="nav-links">
+        <li><a href="scienza.html">SCIENZA</a></li>
+        <li><a href="cultura.html">CULTURA</a></li>
+        <li><a href="music.html">MUSICA</a></li>
+        <li><a href="eco.html">ECOSOSTENIBILITÀ</a></li>
+      </ul>
+    </div>
+
+    <div class="icons">
+      <div class="search-container">
+        <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
+        <input type="text" class="search-input" placeholder="Cerca..." aria-label="Cerca">
+      </div>
+      <i class="fa-solid fa-bars" id="menuIcon" aria-hidden="true"></i>
+    </div>
+  </nav>
+
+  <!-- Menu laterale -->
+  <div class="side-menu" id="sideMenu" aria-hidden="true">
+    <div class="side-menu-header">
+      <a href="index.html" aria-label="Home">
+        <img src="img/favicon.png" alt="Home">
+      </a>
+      <i class="fa-solid fa-xmark" id="closeMenu" aria-label="Chiudi menu"></i>
+    </div>
+    <div class="side-search-container">
+      <input type="text" placeholder="Cerca..." aria-label="Cerca nel menu">
+    </div>
+    <ul>
+      <li><a href="scienza.html">Scienza</a></li>
+      <li><a href="cultura.html">Cultura</a></li>
+      <li><a href="music.html">Musica</a></li>
+      <li><a href="eco.html">Ecosostenibilità</a></li>
+      <li><a href="#contatti">Contatti</a></li>
+    </ul>
+  </div>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+  <!-- HERO -->
+  <header class="music-hero" role="banner" aria-label="Hero Musica">
+    <div class="hero-inner">
+      <h1>Scienza</h1>
+      <p>Tre argomenti per capire il mondo dentro di noi, intorno a noi — con un video finale.</p>
+    </div>
+  </header>
+
+  <!-- Intro -->
+  <section class="section" aria-labelledby="in-evidenza">
+    <h2 id="in-evidenza">In evidenza</h2>
+    <p class="lead">Scienza che stupisce: un viaggio tra memoria, natura e invisibile.</p>
+  </section>
+
+  <!-- CARDS -->
+  <main>
+    <section class="music-card-grid" aria-label="Carte musicali">
+      <!-- Card 1 -->
+      <article class="cardx">
+        <div class="slider">
+          <figure class="slide active"><img src="img/cervello.jpg" alt="Cervello"></figure>
+          <figure class="slide"><img src="img/alzheimer.jpg" alt="Alzheimer"></figure>
+          <figure class="slide"><img src="img/brain.png" alt="Brain"></figure>
+          <button class="arrow prev" aria-label="Precedente"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="arrow next" aria-label="Successiva"><i class="fa-solid fa-chevron-right"></i></button>
+          <div class="dots" role="tablist" aria-label="Slide cantautori">
+            <button class="dot active" role="tab" aria-selected="true" aria-label="Slide 1"></button>
+            <button class="dot" role="tab" aria-selected="false" aria-label="Slide 2"></button>
+            <button class="dot" role="tab" aria-selected="false" aria-label="Slide 3"></button>
+          </div>
+          <div class="band">
+            <h3>Riaccendere le “batterie del cervello”:</h3>
+            <p>Nuovi studi puntano sui mitocondri e sugli impulsi elettrici per l’Alzheimer.</p>
+            <p class="more">Negli ultimi anni la ricerca sull’Alzheimer indaga le mitocondrie — i «generatori» di energia delle cellule — come possibili protagoniste precoci della malattia. Ancora più interessante: alcuni gruppi stanno sperimentando tecniche che riattivano la funzione mitocondriale con stimoli elettrici o ritmi elettrofisici e mostrano miglioramenti cognitivi nei modelli preclinici.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="cardx">
+        <div class="slider">
+          <figure class="slide active"><img src="img/uccelli.jpg" alt="Martin Pescatore acquerello"></figure>
+          <figure class="slide"><img src="img/Martin Pescatore.jpg" alt="Uccello con preda"></figure>
+          <figure class="slide"><img src="img/uccello.png" alt="Martin Pescatore"></figure>
+          <button class="arrow prev" aria-label="Precedente"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="arrow next" aria-label="Successiva"><i class="fa-solid fa-chevron-right"></i></button>
+          <div class="dots" role="tablist" aria-label="Slide flamenco">
+            <button class="dot active" role="tab" aria-selected="true" aria-label="Slide 1"></button>
+            <button class="dot" role="tab" aria-selected="false" aria-label="Slide 2"></button>
+            <button class="dot" role="tab" aria-selected="false" aria-label="Slide 3"></button>
+          </div>
+          <div class="band">
+            <h3>Il becco del Martin Pescatore: un’arma perfetta</h3>
+            <p>Progettato per ridurre al minimo gli spruzzi d'acqua quando colpisce la superficie per catturare la preda.</p>
+            <p class="more">Studi scientifici hanno rivelato che la sua forma aerodinamica ha persino ispirato il design dei treni ad alta velocità giapponesi!</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="cardx">
+        <div class="slider">
+          <figure class="slide active"><img src="img/human.png" alt="Corpo"></figure>
+          <figure class="slide"><img src="img/mani.jpg" alt="Mani"></figure>
+          <figure class="slide"><img src="img/laboratorio.PNG" alt="Ricerca"></figure>
+          <button class="arrow prev" aria-label="Precedente"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="arrow next" aria-label="Successiva"><i class="fa-solid fa-chevron-right"></i></button>
+          <div class="dots" role="tablist" aria-label="Slide UK">
+            <button class="dot active" role="tab" aria-selected="true" aria-label="Slide 1"></button>
+            <button class="dot" role="tab" aria-selected="false" aria-label="Slide 2"></button>
+            <button class="dot" role="tab" aria-selected="false" aria-label="Slide 3"></button>
+          </div>
+          <div class="band">
+            <h3>Microbiomi umani: invisibili controllano il corpo</h3>
+            <p>Nel nostro corpo vivono trilioni di microrganismi che pesano più del nostro cervello.</p>
+            <p class="more">Non solo digeriscono il cibo, ma influenzano il sistema immunitario, l’umore e persino il rischio di malattie. Anche la pelle, i polmoni e la bocca ospitano interi ecosistemi invisibili...fondamentali per la nostra salute.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <!-- VIDEO -->
+  <section class="section video-section" aria-label="Video">
+    <h2>Video</h2>
+    <div class="wrap">
+      <div class="video-frame">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/h_-TA3Ph-E4?si=4UUcSKrq9hzjMMM_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <aside class="video-aside">
+        <h3>Scienza, ricerca e neuroni che diventano gamer</h3>
+        <p>Nel video Barbascura eXtra ci guida attraverso l’esperimento surrealmente affascinante condotto da Cortical Labs, dove circa 800.000 neuroni vengono posti in una sorta di “piatto di elettrodi” chiamato DishBrain. I neuroni ricevono stimoli, imparano a reagire e migliorano grazie a un sistema di ricompense. È l’intelligenza che germoglia dove meno te l’aspetti — una frontiera che mette in gioco idee su coscienza, apprendimento biologico e il confine tra il vivo e il simulato. Una riflessione che incuriosisce, inquieta e spinge a domandarci: cosa significa davvero “sapere” giocare?</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-info">
+        <img src="img/favicon.png" alt="Cerebros favicon">
+        <h3>Cerebros</h3>
+        <p>Divulghiamo scienza, cultura, musica ed ecosostenibilità per menti curiose.</p>
+      </div>
+
+      <div class="footer-links">
+        <h4 class="footer-title">Sezioni</h4>
+        <div class="footer-underline"></div>
+        <ul>
+          <li><a href="scienza.html">Scienza</a></li>
+          <li><a href="cultura.html">Cultura</a></li>
+          <li><a href="music.html">Musica</a></li>
+          <li><a href="eco.html">Ecosostenibilità</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact" id="contatti">
+        <h4 class="footer-title">Contatti</h4>
+        <div class="footer-underline"></div>
+        <p><i class="fa-solid fa-envelope"></i> <a href="mailto:info@cerebros.it">info@cerebros.it</a></p>
+        <p><i class="fa-solid fa-phone"></i> <a href="tel:+390123456789">+39 0123 456789</a></p>
+      </div>
+
+      <div class="footer-newsletter">
+        <h4 class="newsletter-title">Iscriviti alla Newsletter</h4>
+        <form action="#" method="post">
+          <input type="email" name="email" placeholder="Inserisci la tua email" aria-label="Email per newsletter">
+          <button type="submit">Iscriviti</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Cerebros - Accendi la mente. Tutti i diritti riservati.</p>
+    </div>
+  </footer>
+
+  <script>
+  // Ricerca nella navbar
+  document.addEventListener("DOMContentLoaded", function () {
+    const searchContainer = document.querySelector(".search-container");
+    const searchIcon = document.querySelector(".search-icon");
+    const searchInput = document.querySelector(".search-input");
+
+    searchIcon.addEventListener("click", () => {
+      searchContainer.classList.toggle("active");
+      if (searchContainer.classList.contains("active")) searchInput.focus();
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!searchContainer.contains(event.target) && searchContainer.classList.contains("active")) {
+        searchContainer.classList.remove("active");
+      }
+    });
+
+    // Menu laterale
+    const menuIcon = document.getElementById("menuIcon");
+    const sideMenu = document.getElementById("sideMenu");
+    const overlay = document.getElementById("overlay");
+    const closeMenu = document.getElementById("closeMenu");
+
+    const openSideMenu = () => {
+      sideMenu.classList.add("open");
+      overlay.classList.add("active");
+      sideMenu.setAttribute("aria-hidden", "false");
+      overlay.setAttribute("aria-hidden", "false");
+    };
+    const closeSideMenu = () => {
+      sideMenu.classList.remove("open");
+      overlay.classList.remove("active");
+      sideMenu.setAttribute("aria-hidden", "true");
+      overlay.setAttribute("aria-hidden", "true");
+    };
+
+    if (menuIcon) menuIcon.addEventListener("click", openSideMenu);
+    if (closeMenu) closeMenu.addEventListener("click", closeSideMenu);
+    if (overlay) overlay.addEventListener("click", closeSideMenu);
+
+    // Scorri alla sezione Contatti dal menù laterale
+    const contattiLink = document.querySelector('.side-menu a[href="#contatti"]');
+    if (contattiLink) {
+      contattiLink.addEventListener("click", function (e) {
+        e.preventDefault();
+        closeSideMenu();
+        setTimeout(() => {
+          const contattiSection = document.getElementById("contatti");
+          if (contattiSection) contattiSection.scrollIntoView({ behavior: "smooth" });
+        }, 300);
+      });
+    }
+  });
+
+  // Slider per tutte le card
+  document.querySelectorAll('.cardx').forEach(card=>{
+    const slides=[...card.querySelectorAll('.slide')];
+    const dots=[...card.querySelectorAll('.dot')];
+    const prev=card.querySelector('.prev');
+    const next=card.querySelector('.next');
+    let i=0;
+    const setSlide=(idx)=>{
+      i=(idx+slides.length)%slides.length;
+      slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+      dots.forEach((d,k)=>d.classList.toggle('active',k===i));
+      dots.forEach((d,k)=>d.setAttribute('aria-selected', String(k===i)));
+    };
+    if (prev) prev.addEventListener('click',()=>setSlide(i-1));
+    if (next) next.addEventListener('click',()=>setSlide(i+1));
+    dots.forEach((d,idx)=>d.addEventListener('click',()=>setSlide(idx)));
+    setSlide(0);
+  });
+  </script>
+</body>
+</html>
